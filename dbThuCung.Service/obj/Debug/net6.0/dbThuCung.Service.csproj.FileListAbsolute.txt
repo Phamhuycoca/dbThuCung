@@ -1,0 +1,17 @@
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Service.deps.json
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Service.dll
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Service.pdb
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Model.dll
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Repository.dll
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Model.pdb
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\bin\Debug\net6.0\dbThuCung.Repository.pdb
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.csproj.AssemblyReference.cache
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.GeneratedMSBuildEditorConfig.editorconfig
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.AssemblyInfoInputs.cache
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.AssemblyInfo.cs
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.csproj.CoreCompileInputs.cache
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.csproj.CopyComplete
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.dll
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\refint\dbThuCung.Service.dll
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\dbThuCung.Service.pdb
+F:\DuAnNho\TKW1\dbThuCung\dbThuCung.Service\obj\Debug\net6.0\ref\dbThuCung.Service.dll
