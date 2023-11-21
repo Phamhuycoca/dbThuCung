@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dbThuCung.Model.Context;
 
@@ -10,9 +11,10 @@ using dbThuCung.Model.Context;
 namespace dbThuCung.Model.Migrations
 {
     [DbContext(typeof(ThuCungContext))]
-    partial class ThuCungContextModelSnapshot : ModelSnapshot
+    [Migration("20231120125212_acbs")]
+    partial class acbs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

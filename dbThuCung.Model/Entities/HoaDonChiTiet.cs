@@ -10,10 +10,9 @@ namespace dbThuCung.Model.Entities
     {
         public long HoaDonChiTietId {  get; set; }
         public long HoaDonId {  get; set; }
-        public long ObjectId { get; set; }
+        public long SanPhamId { get; set; }
         public int SoLuong { get; set; }
         public HoaDon? HoaDon {  get; set; }
         public SanPham? sanPhams { get; set; }
-        public ThuNuoi? thuNuoi { get; set;}
     }
 }

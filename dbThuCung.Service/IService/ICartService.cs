@@ -10,10 +10,10 @@ namespace dbThuCung.Service.IService
 {
     public interface ICartService
     {
-        //List<CartItem> GetCartItems();
-        List<CartDto> GetCartItems();
+        List<CartItemDto> GetCartItems();
         //bool AddCartItem(long id, int soluong);
         bool AddCartItem(CartItemDto cartItem);
+        List<CartDto> GetCartById(long id);
 
         bool RemoveCartItem(long id);
         bool TangGiamCartItem(CartItemDto cartItem);

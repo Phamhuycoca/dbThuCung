@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,7 @@ namespace dbThuCung.Model.Entities
         public string? Sdt { get; set; }
         public string? Quyen { get; set; }
         public ICollection<HoaDon>? getHoaDon { get; set; }
+        public ICollection<CartItem> getCartItem { get; set; }
+
     }
 }

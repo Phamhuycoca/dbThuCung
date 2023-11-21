@@ -8,6 +8,8 @@ namespace dbThuCung.Model.Dto
 {
     public class CartDto
     {
+        public long CartItemId { get; set; }
+        public long NguoiDungId { get; set; }
         public long SanPhamId { get; set; }
         public string SanPhamTen { get; set; }
         public string? SanPhamHinhAnh { get; set; }

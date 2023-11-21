@@ -33,7 +33,7 @@ namespace dbThuCung.Model.Context
             {
                 e.ToTable("ThuNuoi");
                 e.HasKey(e => e.ThuNuoiId);
-                e.HasOne(e => e.getDanhMuc).WithMany(e => e.ThuNuoi).HasForeignKey(e => e.DanhMucId).OnDelete(DeleteBehavior.Restrict); ;
+                e.HasOne(e => e.getDanhMuc).WithMany(e => e.ThuNuoi).HasForeignKey(e => e.DanhMucId).OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<NguoiDung>(e => {
                 e.ToTable("NguoiDung");
@@ -42,14 +42,21 @@ namespace dbThuCung.Model.Context
             modelBuilder.Entity<HoaDon>(e => {
                 e.ToTable("HoaDon");
                 e.HasKey(e => e.HoaDonId);
-                e.HasOne(e => e.NguoiDung).WithMany(e => e.getHoaDon).HasForeignKey(e => e.NguoiDungId).OnDelete(DeleteBehavior.Restrict); ;
+                e.HasOne(e => e.NguoiDung).WithMany(e => e.getHoaDon).HasForeignKey(e => e.NguoiDungId).OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<HoaDonChiTiet>(e => {
                 e.ToTable("HoaDonChiTiet");
                 e.HasKey(e => e.HoaDonChiTietId);
-                e.HasOne(e => e.HoaDon).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.HoaDonId).OnDelete(DeleteBehavior.Restrict); ;
-                e.HasOne(e => e.sanPhams).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.ObjectId).OnDelete(DeleteBehavior.Restrict); ;
-                e.HasOne(e => e.thuNuoi).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.ObjectId).OnDelete(DeleteBehavior.Restrict); ;
+                e.HasOne(e => e.HoaDon).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.HoaDonId).OnDelete(DeleteBehavior.Restrict);
+                e.HasOne(e => e.sanPhams).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.SanPhamId).OnDelete(DeleteBehavior.Restrict);
+                //e.HasOne(e => e.thuNuoi).WithMany(e => e.HoaDonChiTiet).HasForeignKey(e => e.ObjectId).OnDelete(DeleteBehavior.Restrict); ;
+            });
+            modelBuilder.Entity<CartItem>(e =>
+            {
+                e.ToTable("GioHang");
+                e.HasKey(e => e.CartItemId);
+                e.HasOne(e=>e.SanPham).WithMany(e=>e.CartItem).HasForeignKey(e=>e.SanPhamId).OnDelete(DeleteBehavior.Restrict);
+                e.HasOne(e=>e.NguoiDung).WithMany(e=>e.getCartItem).HasForeignKey(e=>e.NguoiDungId).OnDelete(DeleteBehavior.Restrict);
             });
             base.OnModelCreating(modelBuilder);
         }

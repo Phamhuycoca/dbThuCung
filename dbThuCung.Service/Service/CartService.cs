@@ -1,5 +1,7 @@
-﻿using dbThuCung.Model.Dto;
+﻿using AutoMapper;
+using dbThuCung.Model.Dto;
 using dbThuCung.Model.Entities;
+using dbThuCung.Repository.IRepository;
 using dbThuCung.Service.IService;
 using System;
 using System.Collections.Generic;
@@ -11,47 +13,56 @@ namespace dbThuCung.Service.Service
 {
     public class CartService : ICartService
     {
-        private readonly List<CartItem> _cartItems;
+        private readonly ICartRepo _cartRepo;
+        private readonly IMapper _mapper;
         private readonly ISanPhamService _sanPhamService;
-        public CartService(List<CartItem> cartItems, ISanPhamService sanPhamService)
+        private readonly INguoiDungService _nguoiDungService;
+        public CartService(ICartRepo cartRepo, IMapper mapper, ISanPhamService sanPhamService, INguoiDungService nguoiDungService)
         {
-            _cartItems = cartItems;
+            _cartRepo = cartRepo;
+            _mapper = mapper;
             _sanPhamService = sanPhamService;
+            _nguoiDungService = nguoiDungService;
         }
 
-        public bool AddCartItem(long id, int soluong)
+        public bool AddCartItem(CartItemDto cartItem)
         {
-            var sanpham = _sanPhamService.Get(id);
-            if (sanpham == null)
-            {
-                return false;
-            }
-            else
-            {
-                var gia = sanpham.SanPhamGia;
-                var cart = _cartItems.SingleOrDefault(item => item.SanPhamId == id);
-                if (cart == null)
-                {
-                    if (gia < 0)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        var cartItem = new CartItem();
-                        cartItem.SanPhamId = id;
-                        cartItem.SoLuong = soluong;
-                        cartItem.DonGia = gia;
-                        _cartItems.Add(cartItem);
-                        return true;
-                    }
-                }
-                return false;
-            }
+            return _cartRepo.Add(_mapper.Map<CartItem>(cartItem));
         }
+
+        public List<CartDto> GetCartById(long id)
+        {
+            var query = from nguoidung in _nguoiDungService.GetAll()
+                        where nguoidung.NguoiDungId == id
+                        join cart in _cartRepo.GetAll() on nguoidung.NguoiDungId equals cart.NguoiDungId
+                        join sanpham in _sanPhamService.GetAll() on cart.SanPhamId equals sanpham.SanPhamId
+                        select new CartDto
+                        {
+                            CartItemId = cart.CartItemId,
+                            DonGia = cart.DonGia,
+                            NguoiDungId = cart.NguoiDungId,
+                            SanPhamId = cart.SanPhamId,
+                            SanPhamHinhAnh = sanpham.SanPhamHinhAnh,
+                            SanPhamTen = sanpham.SanPhamTen,
+                            SoLuong = cart.SoLuong
+                        };
+
+            return query.ToList();
+        }
+
+        public List<CartItemDto> GetCartItems()
+        {
+            return _mapper.Map<List<CartItemDto>>(_cartRepo.GetAll());
+        }
+
+        public bool RemoveCartItem(long id)
+        {
+            return _cartRepo.Delete(id);
+        }
+
         public bool TangGiamCartItem(CartItemDto cartItem)
         {
-            var cart = _cartItems.SingleOrDefault(item => item.SanPhamId == cartItem.SanPhamId);
+           /* var cart = _cartRepo.GetAll().SingleOrDefault(item => item.CartItemId == cartItem.CartItemId);
             if (cart != null)
             {
                 if (cartItem.SoLuong < cart.SoLuong)
@@ -60,73 +71,9 @@ namespace dbThuCung.Service.Service
                     return true;
                 }
                 cart.SoLuong += cartItem.SoLuong;
-                return true;
+            }*/
+            return _cartRepo.Update(_mapper.Map<CartItem>(cartItem));
 
-            }
-            return false;
-
-        }
-        /*  public List<CartItem> GetCartItems()
-          {
-              return _cartItems;
-          }*/
-
-        public List<CartDto> GetCartItems()
-        {
-            var query = from sanpham in _sanPhamService.GetAll()
-                        join
-                       cart in _cartItems on sanpham.SanPhamId equals cart.SanPhamId
-                        select new CartDto
-                        {
-                            DonGia = sanpham.SanPhamGia,
-                            SanPhamHinhAnh = sanpham.SanPhamHinhAnh,
-                            SoLuong = cart.SoLuong,
-                            SanPhamId = cart.SanPhamId,
-                            SanPhamTen = sanpham.SanPhamTen
-                        };
-            return query.ToList();
-        }
-
-        public bool RemoveCartItem(long id)
-        {
-            var item = _cartItems.Find(i => i.SanPhamId == id);
-            if (item != null)
-            {
-                _cartItems.Remove(item);
-                return true;
-            }
-            return false;
-        }
-
-        public bool AddCartItem(CartItemDto cartItem)
-        {
-            var sanpham = _sanPhamService.Get(cartItem.SanPhamId);
-            if (sanpham == null)
-            {
-                return false;
-            }
-            else
-            {
-                var gia = sanpham.SanPhamGia;
-                var cart = _cartItems.SingleOrDefault(item => item.SanPhamId == cartItem.SanPhamId);
-                if (cart == null)
-                {
-                    if (gia < 0)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        var Item = new CartItem();
-                        Item.SanPhamId = cartItem.SanPhamId;
-                        Item.SoLuong = cartItem.SoLuong;
-                        Item.DonGia = gia;
-                        _cartItems.Add(Item);
-                        return true;
-                    }
-                }
-                return false;
-            }
         }
     }
 }

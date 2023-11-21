@@ -15,6 +15,5 @@ namespace dbThuCung.Model.Entities
         public string MauLong { get; set; }
         public long DanhMucId {  get; set; }
         public DanhMuc getDanhMuc {  get; set; }
-        public ICollection<HoaDonChiTiet> HoaDonChiTiet { get; set; }
     }
 }

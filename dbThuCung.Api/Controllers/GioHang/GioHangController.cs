@@ -22,33 +22,35 @@ namespace dbThuCung.Api.Controllers.GioHang
         [HttpPost]
         public IActionResult AddToCart([FromBody] Cart model)
         {
-            var cart = _cartService.GetCartItems().FirstOrDefault(x => x.SanPhamId == model.SanPhamId);
+            var cart = _cartService.GetCartItems().Where(x=>x.NguoiDungId==model.NguoiDungId && x.SanPhamId==model.SanPhamId).FirstOrDefault();
             if (cart == null)
             {
-                var dto = new CartItemDto()
-                {
-                    SanPhamId = model.SanPhamId,
-                    SoLuong = model.SoLuong,
-                    DonGia = 0
-                };
-              /*  var item = _cartService.AddCartItem(dto) ? "Thêm giỏ hàng thành công" : "Thêm không thành công";
-                return Ok(item);*/
-                if (_cartService.AddCartItem(dto))
-                {
-                    return Ok("Thêm giỏ hàng thành công");
-                }
-                return BadRequest("Thêm không thành công");
+                    var dto = new CartItemDto()
+                    {
+                        NguoiDungId = model.NguoiDungId,
+                        SanPhamId = model.SanPhamId,
+                        SoLuong = model.SoLuong,
+                        DonGia = model.SanPhamGia
+                    };
+                    if (_cartService.AddCartItem(dto))
+                    {
+                        return Ok("Thêm giỏ hàng thành công");
+                    }
+                    return BadRequest("Thêm không thành công");
             }
             return BadRequest("Đã có trong giỏ hàng");
+
         }
         [HttpPut]
         public IActionResult TangGiam([FromBody] Cart model)
         {
             var dto = new CartItemDto()
             {
+                CartItemId=model.CartItemId,
                 SanPhamId = model.SanPhamId,
                 SoLuong = model.SoLuong,
-                DonGia = 0
+                DonGia = model.SanPhamGia,
+                NguoiDungId=model.NguoiDungId
             };
             if (_cartService.TangGiamCartItem(dto))
             {
@@ -64,6 +66,11 @@ namespace dbThuCung.Api.Controllers.GioHang
                 return Ok("Xóa thành công");
             }
             return BadRequest("Không thể thao tác");
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetCartById(long id)
+        {
+            return Ok(_cartService.GetCartById(id));
         }
     }
 }

@@ -71,6 +71,11 @@ namespace dbThuCung.Api.Controllers.NguoiDung
         {
             return Ok(_nguoiDungService.GetAll());
         }
+        [HttpGet("{id}")]
+        public IActionResult GetById(long id)
+        {
+            return Ok(_nguoiDungService.Get(id));
+        }
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginVM model)
         {
