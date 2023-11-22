@@ -55,6 +55,20 @@ namespace dbThuCung.Service.Service
             return _mapper.Map<List<CartItemDto>>(_cartRepo.GetAll());
         }
 
+        public bool removeCartById(long id)
+        {
+            var cart = _cartRepo.GetAll().Where(x => x.NguoiDungId == id);
+            if (cart != null)
+            {
+                foreach (var i in cart)
+                {
+                    _cartRepo.Delete(i.CartItemId);
+                }
+                return true;
+            }
+            else { return false; }
+        }
+
         public bool RemoveCartItem(long id)
         {
             return _cartRepo.Delete(id);

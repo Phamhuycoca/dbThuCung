@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace dbThuCung.Service.IService
 {
-    internal interface IHoaDonService
+    public interface IHoaDonService
     {
-        List<DanhMucDto> GetAll();
-        DanhMucDto Get(long id);
-        bool Add(DanhMucDto danhmuc);
-        bool Update(DanhMucDto danhmuc);
+        List<HoaDonDto> GetAll();
+        HoaDonDto Get(long id);
+        bool Add(HoaDonDto hoadon);
+        bool Update(HoaDonDto hoadon);
         bool Delete(long id);
+        List<HoaDonDto> GetById(long id);
+
     }
 }

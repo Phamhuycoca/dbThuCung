@@ -25,6 +25,7 @@ namespace dbThuCung.Api.Controllers.DanhMuc
             if (_danhMucService.Add(dto))
             {
                 return Ok(new { message = "Thêm mới thông tin thành công" });
+                //return Ok(_danhMucService.GetAll().LastOrDefault(dto).DanhMucId);
             }
             return Ok(new { message = "Đã tồn tại thông tin" });
             }

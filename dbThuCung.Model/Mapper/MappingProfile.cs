@@ -18,6 +18,8 @@ namespace dbThuCung.Model.Mapper
             CreateMap<ThuNuoi, ThuNuoiDto>().ReverseMap();
             CreateMap<NguoiDung, NguoiDungDto>().ReverseMap();
             CreateMap<CartItem, CartItemDto>().ReverseMap();
+            CreateMap<HoaDon,HoaDonDto>().ReverseMap();
+            CreateMap<HoaDonChiTiet,HoaDonChiTietDto>().ReverseMap();
         }
     }
 }

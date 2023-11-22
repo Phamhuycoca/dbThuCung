@@ -17,5 +17,6 @@ namespace dbThuCung.Service.IService
 
         bool RemoveCartItem(long id);
         bool TangGiamCartItem(CartItemDto cartItem);
+        bool removeCartById(long id);
     }
 }

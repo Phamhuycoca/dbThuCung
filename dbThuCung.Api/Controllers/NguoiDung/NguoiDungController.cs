@@ -200,5 +200,37 @@ namespace dbThuCung.Api.Controllers.NguoiDung
                 return BadRequest($"Token validation failed: {ex.Message}");
             }
         }
+        [HttpPut("updateUser")]
+        public IActionResult updateUser([FromForm] NguoiDungVM model)
+        {
+            var url = _nguoiDungService.Get(model.NguoiDungId).NguoiDungHinhAnh;
+            UpLoadImage upload = new UpLoadImage(_cloudinary);
+            var dto =new NguoiDungDto();
+            dto.Quyen = model.Quyen;
+            dto.NguoiDungId = model.NguoiDungId;
+            dto.HoVaTen=model.HoVaTen;
+            dto.DiaChi =model.DiaChi;
+            dto.Email =model.Email;
+            dto.Password = model.Password;
+            dto.Sdt = model.Sdt;
+            if (model.NguoiDungHinhAnh != null)
+            {
+                if (url != null)
+                {
+                    upload.DeleteImage(url);
+                    dto.NguoiDungHinhAnh = upload.ImageUpload(model.NguoiDungHinhAnh);
+                }
+                else
+                {
+                dto.NguoiDungHinhAnh = upload.ImageUpload(model.NguoiDungHinhAnh);
+                }
+            }
+            else
+            {
+                dto.NguoiDungHinhAnh = url;
+            }
+            _nguoiDungService.Update(dto);
+            return Ok("Cập nhật thông tin thành công");
+        }
     }
 }

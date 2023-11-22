@@ -32,6 +32,8 @@ builder.Services.AddScoped<ISanPhamRepo,SanPhamRepo>();
 builder.Services.AddScoped<IThuNuoiRepo,ThuNuoiRepo>();
 builder.Services.AddScoped<INguoiDungRepo, NguoiDungRepo>();
 builder.Services.AddScoped<ICartRepo,CartRepo>();
+builder.Services.AddScoped<IHoaDonRepo,HoaDonRepo>();
+builder.Services.AddScoped<IChiTietHoaDonRepo,ChiTietHoaDonRepo>();
 
 
 //Serivce
@@ -42,6 +44,8 @@ builder.Services.AddScoped<IEmailService,EmailService>();
 builder.Services.AddScoped<INguoiDungService,NguoiDungService>();
 //builder.Services.AddSingleton<List<CartItem>>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IChiTietHoaDonService,ChiTietHoaDonService>();
+builder.Services.AddScoped<IHoaDonService, HoaDonService>();
 //builder.Services.AddScoped<GioHangController>();
 //Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));

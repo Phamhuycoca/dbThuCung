@@ -14,5 +14,7 @@ namespace dbThuCung.Service.IService
         bool Add(DanhMucDto danhmuc);
         bool Update(DanhMucDto danhmuc);
         bool Delete(long id);
+        List<ChiTietHoaDon_SanPham> GetById();
+
     }
 }

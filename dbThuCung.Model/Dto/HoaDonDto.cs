@@ -11,9 +11,9 @@ namespace dbThuCung.Model.Dto
         public long HoaDonId { get; set; }
         public long NguoiDungId { get; set; }
         public decimal TongTien { get; set; }
-        public string HoaDonDiaChi { get; set; }
-        public string HoaDonSdt { get; set; }
-        public string NgayTao { get; set; }
+        public string? HoaDonDiaChi { get; set; }
+        public string? HoaDonSdt { get; set; }
+        public string? NgayTao { get; set; }
         public int TrangThai { get; set; }
     }
 }
