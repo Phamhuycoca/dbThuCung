@@ -46,6 +46,7 @@ builder.Services.AddScoped<INguoiDungService,NguoiDungService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IChiTietHoaDonService,ChiTietHoaDonService>();
 builder.Services.AddScoped<IHoaDonService, HoaDonService>();
+builder.Services.AddScoped<IDashboardService,DashboardService>();
 //builder.Services.AddScoped<GioHangController>();
 //Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
