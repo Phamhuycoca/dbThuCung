@@ -107,7 +107,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("Khách hàng", policy => policy.RequireRole("Khách hàng"));
+    options.AddPolicy("Người dùng", policy => policy.RequireRole("Người dùng"));
 });
 builder.Services.AddCors(options =>
 {

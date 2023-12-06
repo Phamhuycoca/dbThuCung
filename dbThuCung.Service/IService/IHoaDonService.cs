@@ -15,6 +15,10 @@ namespace dbThuCung.Service.IService
         bool Update(HoaDonDto hoadon);
         bool Delete(long id);
         List<HoaDonDto> GetById(long id);
-
+        List<HoaDonChuaDuyetDto> GetDonHangChuaDuyet();
+        List<HoaDonChuaDuyetDto> GetDonHangDaDuyet();
+        List<HoaDonChuaDuyetDto> GetDonHangDangGiao();
+        List<HoaDonChuaDuyetDto> GetDonHangDaGiao();
+        bool DuyetDonHang(List<HoaDonChuaDuyetDto> duyetdonhang);
     }
 }

@@ -72,5 +72,45 @@ namespace dbThuCung.Api.Controllers.HoaDon
             }
             return BadRequest("Không thể thực hiện thao tác");
         }
+        [HttpPost("DuyetDonHang")]
+        public IActionResult DuyetDonHang([FromBody] List<HoaDonChuaDuyetDto> hoaDonChuaDuyetDto)
+        {
+            if(_hoaDonService.DuyetDonHang(hoaDonChuaDuyetDto))
+            {
+                return Ok("Duyệt danh thành công");
+            }
+            return BadRequest("Không thể thực hiện thao tác");
+        }
+        [HttpGet("GetDonHangChuaDuyet")]
+        public IActionResult GetDonHangChuaDuyet()
+        {
+            return Ok(_hoaDonService.GetDonHangChuaDuyet());
+        }
+        [HttpGet("GetDonHangDaDuyet")]
+        public IActionResult GetDonHangDaDuyet()
+        {
+            return Ok(_hoaDonService.GetDonHangDaDuyet());
+        }
+        [HttpGet("GetDonHangDangGiao")]
+        public IActionResult GetDonHangDangGiao()
+        {
+            return Ok(_hoaDonService.GetDonHangDangGiao());
+        }
+        [HttpGet("GetDonHangDaGiao")]
+        public IActionResult GetDonHangDaGiao()
+        {
+            return Ok(_hoaDonService.GetDonHangDaGiao());
+        }
+        [HttpPut("{id}")]
+        public IActionResult DaNhan(int id)
+        {
+            var dto =_hoaDonService.Get(id);
+            dto.TrangThai = 3;
+            if (_hoaDonService.Update(dto))
+            {
+                return Ok("Nhận hàng thành công");
+            }
+            return BadRequest("Lỗi không thể thao tác");
+        }
     }
 }
