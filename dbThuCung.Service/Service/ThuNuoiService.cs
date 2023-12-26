@@ -42,6 +42,24 @@ namespace dbThuCung.Service.Service
             return _mapper.Map<List<ThuNuoiDto>>(_thuNuoiRepo.GetAll());
         }
 
+        public List<ThuNuoiDto> GetAllBySearch(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return _mapper.Map<List<ThuNuoiDto>>(_thuNuoiRepo.GetAll());
+            }
+            else
+            {
+                var value = search.ToLower();
+                return _mapper.Map<List<ThuNuoiDto>>(_thuNuoiRepo.GetAll().Where(x =>
+                x.ThuNuoiTen?.ToLower().Contains(search) == true ||
+                x.ThuNuoiGia.ToString().ToLower().Contains(search) == true ||
+                x.MauLong.ToString().ToLower().Contains(search)
+                ));
+
+            }
+        }
+
         public bool Update(ThuNuoiDto thunuoi)
         {
             try

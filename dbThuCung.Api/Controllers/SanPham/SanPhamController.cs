@@ -86,5 +86,10 @@ namespace dbThuCung.Api.Controllers.SanPham
             }
             return NotFound();
         }
+        [HttpGet("Search/{search}")]
+        public IActionResult Search(string search)
+        {
+            return Ok(_sanPhamService.GetAllBySearch(search));
+        }
     }
 }

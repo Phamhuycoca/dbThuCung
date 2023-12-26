@@ -14,5 +14,7 @@ namespace dbThuCung.Service.IService
         bool Add(SanPhamDto sanpham);
         bool Update(SanPhamDto sanpham);
         bool Delete(long id);
+        List<SanPhamDto> GetAllBySearch(string search);
+
     }
 }

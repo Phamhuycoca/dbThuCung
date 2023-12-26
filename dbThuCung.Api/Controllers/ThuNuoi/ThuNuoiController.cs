@@ -87,5 +87,10 @@ namespace dbThuCung.Api.Controllers.ThuNuoi
             }
             return NotFound();
         }
+        [HttpGet("Search/{search}")]
+        public IActionResult Search(string search)
+        {
+            return Ok(_thuNuoiService.GetAllBySearch(search));
+        }
     }
 }

@@ -51,8 +51,8 @@ namespace dbThuCung.Api.Controllers.NguoiDung
                     {
                         Email = model.Email,
                         HoVaTen = model.HoVaTen,
-                        //Password = md.GetMD5(model.Password),
-                        Password = model.Password,
+                        Password = md.GetMD5(model.Password),
+                        //Password = model.Password,
                         Quyen = "Người dùng"
                     };
                     _nguoiDungService.Register(dto);
@@ -80,8 +80,8 @@ namespace dbThuCung.Api.Controllers.NguoiDung
         public IActionResult Login([FromBody] LoginVM model)
         {
             HashMD5 md = new HashMD5();
-            //var user = _nguoiDungService.GetAll().Find(x => x.Email == model.Email && x.Password == md.GetMD5(model.Password));
-            var user = _nguoiDungService.GetAll().Find(x => x.Email == model.Email && x.Password == model.Password);
+            var user = _nguoiDungService.GetAll().Find(x => x.Email == model.Email && x.Password == md.GetMD5(model.Password));
+            // var user = _nguoiDungService.GetAll().Find(x => x.Email == model.Email && x.Password == model.Password);
 
             if (user != null)
             {
@@ -102,8 +102,9 @@ namespace dbThuCung.Api.Controllers.NguoiDung
                 return Ok(new
                 {
                     message = "Đăng nhập thành công",
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
-                });
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    trangthai = user.Quyen
+                }) ;
             }
             return BadRequest("Tài khoản hoặc mật khẩu không chính xác");
         }

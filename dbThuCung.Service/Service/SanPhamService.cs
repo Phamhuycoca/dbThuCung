@@ -2,6 +2,7 @@
 using dbThuCung.Model.Dto;
 using dbThuCung.Model.Entities;
 using dbThuCung.Repository.IRepository;
+using dbThuCung.Repository.Repository;
 using dbThuCung.Service.IService;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,24 @@ namespace dbThuCung.Service.Service
             return _mapper.Map<List<SanPhamDto>>(_sanPhamRepo.GetAll());
         }
 
+        public List<SanPhamDto> GetAllBySearch(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return _mapper.Map<List<SanPhamDto>>(_sanPhamRepo.GetAll());
+            }
+            else
+            {
+                var value = search.ToLower();
+                return _mapper.Map<List<SanPhamDto>>(_sanPhamRepo.GetAll().Where(x =>
+                x.SanPhamTen?.ToLower().Contains(search) == true ||
+                x.SanPhamGia.ToString().ToLower().Contains(search) == true));
+
+            }
+        }
+
         public bool Update(SanPhamDto sanpham)
         {
-            //return _sanPhamRepo.Update(_mapper.Map<SanPham>(sanpham));
             try
             {
                 var existingEntity = _sanPhamRepo.Get(sanpham.SanPhamId);
